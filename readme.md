@@ -1,3 +1,41 @@
+This repository builds on the work associated with the 2016 JAMA paper: [The Association between Income and Life Expectancy in the United States, 2001 - 2014](http://jama.jamanetwork.com/article.aspx?articleId=2513561&guestAccessKey=4023ce75-d0fb-44de-bb6c-8a10a30a6173), by Raj Chetty, Michael Stepner, Sarah Abraham, Shelby Lin, Benjamin Scuderi, Nicholas Turner, Augustin Bergeron, and David Cutler. *The Journal of the American Medical Association* (2016), Vol 315, No. 14.
+
+The code necessary to replicate the work can be found [on GitHub](https://github.com/michaelstepner/healthinequality-code).
+
+This code was forked and updated as needed to create our data of interest.
+
+# Instructions
+
+To run the original replication code, Chetty et al provide detailed instructions on their GitHub page (linked above). For our purposes, we are only concerned with replicating (and extending) part of the code found in the `mortality_datagen.do` data pipeline. Specifically, we need to re-run the code that generates the life expectancies by year, state, gender and income quartile. In other words we only need to edit and run:
+1. `./code/lifeexpectancy/generate_life_expectancies.do` and
+2. `./code/ado/generate_le_with_raceadj.ado`
+
+In addition to editing those files, we need to download both data sets offered by Chetty et al. We need to take the ***data-only ZIP file*** and extract the contents into our repository. So now there should be the following directories/folders in the repository:
+1. code
+2. data
+3. scratch
+
+Next, we need to move three files from the ***derived results ZIP file*** into specfic locations in our repository.
+
+copy file: `DERIVED_RESULTS/data/derived/raceshares/st_racesharesBY_year_agebin_gnd_hhincquartile.dta`  
+into folder: `./data/derived/raceshares`
+
+----------------------------------------------------
+
+copy file: `DERIVED_RESULTS/data/derived/le_estimates/st_leBY_year_gnd_hhincquartile.dta`  
+into folder: `./data/derived/le_estimates`
+
+-----------------------------------------------------
+
+copy folder: `DERIVED_RESULTS/data/derived/NLMS/bootstrap`  
+into folder: `./data/derived/NLMS`
+
+
+
+
+
+
+
 
 This repository contains the code of the 2016 JAMA paper: [The Association between Income and Life Expectancy in the United States, 2001 - 2014](http://jama.jamanetwork.com/article.aspx?articleId=2513561&guestAccessKey=4023ce75-d0fb-44de-bb6c-8a10a30a6173), by Raj Chetty, Michael Stepner, Sarah Abraham, Shelby Lin, Benjamin Scuderi, Nicholas Turner, Augustin Bergeron, and David Cutler. *The Journal of the American Medical Association* (2016), Vol 315, No. 14.
 
