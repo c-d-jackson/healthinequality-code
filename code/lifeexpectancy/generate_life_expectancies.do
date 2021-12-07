@@ -42,6 +42,8 @@ cap mkdir "${root}/data/derived/le_estimates/Expected life years until 77"
 
 project, original("${root}/code/ado/generate_le_with_raceadj.ado")
 
+/*
+
 *******************************************
 *** Life Expectancy Estimates, National ***
 *******************************************
@@ -199,6 +201,14 @@ generate_le_with_raceadj, by(st gnd hh_inc_q) ///
 	gomporiginal gompparameters("$derived/Gompertz Parameters/st_gompBY_gnd_hhincquartile.dta") ///
 	raceshares("$derived/raceshares/st_racesharesBY_agebin_gnd_hhincquartile.dta") ///
 	saving("$derived/le_estimates/st_leBY_gnd_hhincquartile.dta")
+
+* State by Gender x Income Quartile x Year
+generate_le_with_raceadj, by(st gnd hh_inc_q year) maxage_gomp_parameterfit(63) ///
+	gomporiginal gompparameters("$derived/Gompertz Parameters/st_gompBY_gnd_hhincquartile_year.dta") ///
+	raceshares("$derived/raceshares/st_racesharesBY_year_agebin_gnd_hhincquartile.dta") ///
+	saving("$derived/le_estimates/st_leBY_year_gnd_hhincquartile.dta")  // formerly st_le_quartile_yod.dta
+
+*/
 
 * State by Gender x Income Quartile x Year
 generate_le_with_raceadj, by(st gnd hh_inc_q year) maxage_gomp_parameterfit(63) ///
