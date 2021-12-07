@@ -210,9 +210,14 @@ generate_le_with_raceadj, by(st gnd hh_inc_q year) maxage_gomp_parameterfit(63) 
 
 */
 
+forvalues i = 40/42 {
+
+di "this is for age `i'"
+
 * State by Gender x Income Quartile x Year
 generate_le_with_raceadj, by(st gnd hh_inc_q year) maxage_gomp_parameterfit(63) ///
 	gomporiginal gompparameters("$derived/Gompertz Parameters/st_gompBY_gnd_hhincquartile_year.dta") ///
 	raceshares("$derived/raceshares/st_racesharesBY_year_agebin_gnd_hhincquartile.dta") ///
 	saving("$derived/le_estimates/st_leBY_year_gnd_hhincquartile.dta")  // formerly st_le_quartile_yod.dta
 
+}
