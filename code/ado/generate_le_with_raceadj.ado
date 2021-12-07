@@ -52,7 +52,7 @@ program define generate_le_with_raceadj
 		raceshares(string) gompparameters(string) saving(string) ///
 		[ raceshifters(string) reference_raceshares(string) cdc_mortrates(string) ///
 		maxage_gomp_parameterfit(integer 76) maxage_gomp_LEextrap(integer 90) ///
-		safe continuous returngompertz ///
+		safe continuous returngompertz le_age(integer) ///
 		original gomporiginal ]
 	if ("`original'"=="") local uses uses
 	else local uses original
@@ -153,7 +153,8 @@ program define generate_le_with_raceadj
 		if !regexm(`"`: subinstr local saving "\" "/", all'"',`"^`=subinstr(c(tmpdir),"\","/",.)'"') project, creates(`"`saving'"')
 		exit
 	}
-
+	
+	/*
 	*** Compute expected age at death at age 40
 	foreach r in "agg" "w" "b" "a" "h" {
 	
@@ -169,6 +170,26 @@ program define generate_le_with_raceadj
 		mata: gen_uniform_lifeyears(`maxage_gomp_LEextrap', "`uniform_mort_M'", "`uniform_mort_F'")
 	
 		gen le_`r' = 40 + expectedLY_gomp + expectedLY_uniform
+		drop gomp_int gomp_slope expectedLY_gomp surv_endgomp expectedLY_uniform
+		
+	}
+	*/
+	
+	*** Compute expected age at death at age 40
+	foreach r in "agg" "w" "b" "a" "h" {
+	
+		rename (gomp_int_`r' gomp_slope_`r') (gomp_int gomp_slope)
+	
+		if ("`continuous'"=="continuous") {
+			replace gomp_int = gomp_int - 0.5 * gomp_slope  // since "age 40" in IRS estimation is actually age [40,41)
+			gen_gomp_lifeyears_cont, startage(`le_age') endage(`maxage_gomp_LEextrap')
+			gen surv_endgomp = exp( 1 / gomp_slope * ( exp(gomp_int + gomp_slope * `le_age') - exp(gomp_int + gomp_slope * `maxage_gomp_LEextrap') ) )
+		}
+		else mata: gen_gomp_lifeyears_disc(`le_age', `maxage_gomp_LEextrap')		
+		
+		mata: gen_uniform_lifeyears(`maxage_gomp_LEextrap', "`uniform_mort_M'", "`uniform_mort_F'")
+	
+		gen le_`r' = `le_age' + expectedLY_gomp + expectedLY_uniform
 		drop gomp_int gomp_slope expectedLY_gomp surv_endgomp expectedLY_uniform
 		
 	}
