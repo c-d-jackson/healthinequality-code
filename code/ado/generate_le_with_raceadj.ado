@@ -52,7 +52,7 @@ program define generate_le_with_raceadj
 		raceshares(string) gompparameters(string) saving(string) ///
 		[ raceshifters(string) reference_raceshares(string) cdc_mortrates(string) ///
 		maxage_gomp_parameterfit(integer 76) maxage_gomp_LEextrap(integer 90) ///
-		safe continuous returngompertz le_age(integer) ///
+		safe continuous returngompertz le_age(integer 40) ///
 		original gomporiginal ]
 	if ("`original'"=="") local uses uses
 	else local uses original
