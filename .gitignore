@@ -16,3 +16,6 @@ data/
 scratch/
 results/
 code/set_julia.do
+
+# Other jackson ignores
+.DS_Store

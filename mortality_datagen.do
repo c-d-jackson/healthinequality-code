@@ -17,6 +17,8 @@ cap mkdir "`pdir'/scratch"
 project, relies_on("`pdir'/code/set_environment.do")
 project, relies_on("`pdir'/code/ado_ssc/save13.ado")
 
+/*
+
 ******************
 *** Covariates ***
 ******************
@@ -85,12 +87,16 @@ project, do(code/raceshares/cty_cz_st_raceshareBY_year_agebin_gnd_hhincquantile.
 
 project, do(code/mortality/construct_cdc_mortrates.do)
 
+*/
+
 
 *************************
 *** Life Expectancies ***
 *************************
 
 project, do(code/lifeexpectancy/generate_life_expectancies.do)
+
+/*
 project, do(code/lifeexpectancy/bootstrap_le.do)
 project, do(code/lifeexpectancy/compute_LE_trends.do)
 project, do(code/lifeexpectancy/generate_bootstrap_confidence_estimates.do)
@@ -102,3 +108,4 @@ project, do("code/lifeexpectancy/Estimate NCHS State LEs pooling income groups.d
 **************************
 
 project, do(code/create_online_tables.do)
+*/
